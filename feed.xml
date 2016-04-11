@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Matt Slater</title>
+    <link>http://jbake.org</link>
+    <atom:link href="http://jbake.org/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Matt Slater's Blog</description>
+    <language>en-gb</language>
+    <pubDate>Sun, 10 Apr 2016 22:24:09 -0400</pubDate>
+    <lastBuildDate>Sun, 10 Apr 2016 22:24:09 -0400</lastBuildDate>
+
+    <item>
+      <title>Hello, World or &quot;Laissez la folie commencer&quot;</title>
+      <link>http://jbake.org/blog/2016/hello-world.html</link>
+      <pubDate>Fri, 1 Apr 2016 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2016/hello-world.html</guid>
+      	<description>
+	&lt;p&gt;This is it.&lt;br/&gt;This is the first post.&lt;br/&gt;The first post of many posts.&lt;/p&gt;&lt;p&gt;I&apos;ll be writing about my personal projects.&lt;br/&gt;I&apos;ll be writing about coding.&lt;br/&gt;I&apos;ll be writing about the things I learn.&lt;/p&gt;&lt;p&gt;Are you ready?&lt;br/&gt;I am.&lt;/p&gt;&lt;p&gt;-M&lt;/p&gt;
+	</description>
+    </item>
+
+  </channel>
+</rss>

@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css?family=Droid+Serif');
+body {
+    /*  background-image: linear-gradient(rgba(240, 128, 128, 0.89), rgba(240, 128, 128, .95)), url(assets/img/sunflower.jpg); */
+    font-family: 'Inconsolata';
+}
+#top,
+#bottom,
+#left,
+#right {
+    background-color: black;
+    position: fixed;
+}
+#left,
+#right {
+    top: 0;
+    bottom: 0;
+    width: 10px;
+}
+#left {
+    left: 0;
+}
+#right {
+    right: 0;
+}
+#top,
+#bottom {
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+#top {
+    top: 0;
+}
+#bottom {
+    bottom: 0;
+}
+#name {
+    padding: 15px;
+    font-family: 'Inconsolata';
+    font-size: 55px;
+    text-align: center;
+    text-decoration: underline;
+    color: black;
+}
+
+#pizza {
+  text-decoration: underline;
+  color: black;
+}
+#pizza:hover {
+  color: aliceblue;
+  transition: color 250ms;
+}
+
+
+#name:hover {
+    color: aliceblue;
+    transition: color 250ms;
+}
+.box {
+    width: 10%;
+    text-align: center;
+    border: 10px solid;
+}
+.button {
+    padding: 20px;
+    cursor: pointer;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(80, 80, 80, 0.90);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    text-align: center;
+}
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 45%;
+    transition: all 5s ease-in-out;
+    text-align: center;
+    color: white;
+}
+.close {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    font-size: 50px;
+    text-decoration: none;
+    color: aliceblue;
+}
+.close:hover {
+    color: lightcoral;
+    transition: color 500ms linear;
+}
+.contentBox {
+    padding: 30px;
+    margin: 30px auto;
+    border: solid 5px;
+    background-color: white;
+    max-width: 800px;
+}
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+    position: fixed;
+    padding: 2% 0;
+}
+#menuList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 50;
+    color: white;
+}
+#menuList li {
+    padding: 10;
+    /*color: lightcoral; */
+    text-decoration: none;
+}
+#menuList li a {
+    text-decoration: overline;
+    color: aliceblue;
+}
+#menuList li a:hover {
+    color: mediumspringgreen;
+    transition: color 500ms linear;
+}
+#list {
+    padding: 20% 0;
+}
+#menubutton {
+    color: black;
+    position: absolute;
+    top: 10;
+    left: 10;
+}
+p {
+  font-family: 'Droid Serif', serif;
+}
+.material-icons.md-18 {
+    font-size: 18px;
+}
+.material-icons.md-24 {
+    font-size: 24px;
+}
+.material-icons.md-36 {
+    font-size: 36px;
+}
+.material-icons.md-48 {
+    font-size: 48px;
+}
+nav {
+    display: block;
+    text-align: center;
+}
+nav a {
+    font-size: 20px;
+    text-decoration: underline;
+    color: black;
+}
+nav a:hover {
+    color: aliceblue;
+    transition: color 250ms;
+}
