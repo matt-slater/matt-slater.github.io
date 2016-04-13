@@ -46,7 +46,7 @@ body {
 }
 
 hr {
-	border-top: 1px dotted black;
+	border-top: 3px dotted black;
 }
 #pizza {
   text-decoration: underline;
