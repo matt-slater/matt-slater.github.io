@@ -45,9 +45,7 @@ body {
     color: black;
 }
 
-hr {
-	border-top: 3px dotted black;
-}
+
 #pizza {
   text-decoration: underline;
   color: black;
