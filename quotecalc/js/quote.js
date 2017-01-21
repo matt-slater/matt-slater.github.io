@@ -1,6 +1,6 @@
 var directionDisplay,
-	directionsService = new google.maps.DirectionsService(),
-	geocoder = new google.maps.Geocoder(),
+	directionsService,
+	geocoder,
 	map,
 	style = STYLE;
 
@@ -26,6 +26,8 @@ function initMap() {
 	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 	directionsDisplay.setMap(map);
 	directionsDisplay.setPanel(document.getElementById("panel"));
+	directionsService = new google.maps.DirectionsService();
+	geocoder = new google.maps.Geocoder()
 
 }
 
