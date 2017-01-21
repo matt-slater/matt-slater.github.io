@@ -122,7 +122,8 @@ function calcQuote(d, t) {
 		totalJS = 0;
 
 	if (d < 12) {
-		expression = 5 * (Math.floor(Math.abs((42 + (((d) * 10) * 0.5)) / 5)));
+		expression = 5 * (Math.floor(Math.abs((40 + (((d) * 10) * 0.5)) / 5)));
+		exression = expression + 2;
 		tollsJS = 0;
 		if (d <= 1) {
 			expression = 42;
