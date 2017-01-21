@@ -1,5 +1,5 @@
 var directionDisplay,
-	var directionsService = new google.maps.DirectionsService(),
+	directionsService = new google.maps.DirectionsService(),
 	geocoder = new google.maps.Geocoder(),
 	map,
 	style = STYLE;
