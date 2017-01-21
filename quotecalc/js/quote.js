@@ -7,7 +7,7 @@ var directionDisplay,
 
 
 
-function initialize() {
+function initMap() {
 	//"use strict";
 	directionsDisplay = new google.maps.DirectionsRenderer();
 	var nyc = new google.maps.LatLng(40.761297, -73.980379),
