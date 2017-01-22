@@ -40,17 +40,20 @@
 					<input class="form-control" type="text" name="dropoff" id="dropoff" placeholder="Destination" onkeydown="if (event.keyCode == 13) document.getElementById('xxx').click()" />
 				</div>
 				<div class="col-md-4">
-					<button class="btn btn-primary" onclick="calcRoute()">Calculate Quote</button>    
+					<button class="btn btn-defaults" onclick="calcRoute()">Calculate Quote</button>    
 				</div>
 			</div>
 
 			<div class="row">
-			<label for="m2m">Manhattan to Manhattan</label>
-			<input type="checkbox" name="m2m" id="m2m" value="m2m" checked>
-			<label for="outsideNYC">Origin is outside Manhattan</label>
-			<input type="checkbox" name="outsideNYC" id="check" value="outsideNYC">
-			<label for="afterHours">After Hours?</label>
-			<input type="checkbox" name="afterHours" id="afterHours" value="afterHours">
+			<div class="checkbox">
+				<label><input type="checkbox" name="m2m" id="m2m" value="m2m" checked></label>
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox" name="outsideNYC" id="check" value="outsideNYC"></label>
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox" name="afterHours" id="afterHours" value="afterHours"></label>
+			</div>
 			</div>
 			
 
