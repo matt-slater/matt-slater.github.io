@@ -20,43 +20,44 @@
 <body onload="initMap()">
 	<div class="container">
 
-		<div id="header_title">
-			<img src="img/logo.png" style="float: left; margin-top: 7px; margin-right:5px;" />
-			<div style="padding-left: 5px">
-				<h1>QUOTE CALCULATOR</h1>
-			</div>
+		<div class="row">
+			<h1 class="display-4">
+				Pet Chauffeur
+				<small class="text-muted">Quote Calculator</small>
+			</h1>
 		</div>
 
 
 
 
-		<div>
+		
 
-			<div id="holder">
-				<div id="butts">
+			<div class="row">
+				<div class="col-md-6">
 					<input type="text" name="pickup" placeholder="Origin" id="pickup" onkeydown="if (event.keyCode == 13) document.getElementById('xxx').click()" />
 				</div>
-				<div id="asses">
+				<div class="col-md-6">
 					<input type="text" name="dropoff" id="dropoff" placeholder="Destination" onkeydown="if (event.keyCode == 13) document.getElementById('xxx').click()" />
 				</div>
 			</div>
 
+			<div class="row">
 			<label for="m2m">Manhattan to Manhattan</label>
 			<input type="checkbox" name="m2m" id="m2m" value="m2m" checked>
 			<label for="outsideNYC">Origin is outside Manhattan</label>
 			<input type="checkbox" name="outsideNYC" id="check" value="outsideNYC">
 			<label for="afterHours">After Hours?</label>
 			<input type="checkbox" name="afterHours" id="afterHours" value="afterHours">
-
-			<br>
-			<button id="xxx" onclick="calcRoute()">Calculate Quote</button>
-
+			</div>
+			<div class="row">
+				<button class="btn btn-primary" onclick="calcRoute()">Calculate Quote</button>
+			</div>
 
 			
 
 			<table class="table table-striped">
 				<tr>
-					<th colspan="2">QUOTE INFO</td>
+					<th colspan="2">QUOTE INFO</th>
 				</tr>
 				<tr>
 					<td>Distance</td>
@@ -87,11 +88,12 @@
 			
 
 
-		</div>
+		
 
-
+		<div class="row">
 		<div id="map_canvas"></div>
-		<div></div>
+		</div>
+		
 	</div>
 
 </body>
