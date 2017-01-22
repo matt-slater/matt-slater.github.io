@@ -2,7 +2,8 @@
 
 <head>
 	<title>Pet Chauffeur Quote Calculator</title>
-	<link rel="stylesheet" type="text/css" href="css/css.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
 
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<script src="js/mapStyle.js"></script>
@@ -17,7 +18,7 @@
 </head>
 
 <body onload="initMap()">
-	<div id="main">
+	<div class="container">
 
 		<div id="header_title">
 			<img src="img/logo.png" style="float: left; margin-top: 7px; margin-right:5px;" />
@@ -29,7 +30,7 @@
 
 
 
-		<div id="form">
+		<div>
 
 			<div id="holder">
 				<div id="butts">
@@ -51,44 +52,9 @@
 			<button id="xxx" onclick="calcRoute()">Calculate Quote</button>
 
 
-			<!------
+			
 
-			<div id="quoteDetails">
-
-				<div id="d">
-					<input type="text" placeholder="Distance" name="distance" id="distance" readonly="true" />
-				</div>
-				<div id="duration">
-					<input type="text" name="time" id="time" placeholder="Duration" readonly="true" />
-				</div>
-			</div>
-			<div class="container">
-				<div class="row">
-					<div class="column">Pricing</div>
-				</div>
-				<div class="row">
-					<div class="column">Base Fare:</div>
-					<div id="baseFare" class="column">$0</div>
-				</div>
-				<div class="row">
-					<div class="column">Tip:</div>
-					<div id="tip" class="column">$0</div>
-				</div>
-				<div class="row">
-					<div class="column">Estimated Tolls:</div>
-					<div id="tolls" class="column">$0</div>
-				</div>
-				<div class="row">
-					<div class="column">Total Fare:</div>
-					<div id="totalFare" class="column">$0</div>
-				</div>
-
-
-			</div>
-
------->
-
-			<table>
+			<table class="table table-striped">
 				<tr>
 					<th colspan="2">QUOTE INFO</td>
 				</tr>
@@ -118,7 +84,7 @@
 				</tr>
 			</table>
 
-			<div></div>
+			
 
 
 		</div>
