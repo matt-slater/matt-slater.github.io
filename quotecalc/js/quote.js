@@ -156,7 +156,7 @@ function calcQuote(d, t) {
 
         tollsJS = 0;
         if (d <= 1) {
-            expression = 42;
+            expression = 40;
             tollsJS = 0;
         }
     } else
