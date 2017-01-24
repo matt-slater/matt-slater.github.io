@@ -191,6 +191,7 @@ function calcQuote(d, t) {
     tipJS = expression * 0.2;
     tollsJS = tollsJS.toFixed(2);
     totalJS = (expression + tipJS + tollsJS);
+    console.log(totalJS);
     totalJS = totalJS.toFixed(2);
 
 
