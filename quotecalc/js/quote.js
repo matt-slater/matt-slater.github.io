@@ -188,7 +188,7 @@ function calcQuote(d, t) {
     expression = expression.toFixed(2);
     expression = Math.round(expression);
     expression = expression + 2;
-    tipJS = expression * 0.2;
+    tipJS = (expression * 0.2).toFixed(2);
     tollsJS = parseFloat(tollsJS).toFixed(2);
     totalJS = (expression + tipJS + tollsJS);
     console.log(totalJS);
