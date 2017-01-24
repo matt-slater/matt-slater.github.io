@@ -101,12 +101,16 @@
 		
 	</div>
 	<script>
-	    var placeSearch, autocomplete;
+	    var placeSearch, autocomplete, ac1;
 	    function initAutocomplete() {
 	        // Create the autocomplete object, restricting the search to geographical
 	        // location types.
 	        autocomplete = new google.maps.places.Autocomplete(
 	            /** @type {!HTMLInputElement} */(document.getElementById('pickup')),
+	            {types: ['geocode']});
+		    
+		    ac1 = new google.maps.places.Autocomplete(
+	            /** @type {!HTMLInputElement} */(document.getElementById('dropoff')),
 	            {types: ['geocode']});
 
 	        // When the user selects an address from the dropdown, populate the address
