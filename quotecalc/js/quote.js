@@ -197,8 +197,8 @@ function calcQuote(d, t) {
 
     //quote.innerHTML = ('$' + expression + '');
     baseFare.innerHTML = ('$' + expression + '');
-    tip.innerHTML = ('$' + tipJS.toFixed(2) + '');
-    tolls.innerHTML = ('$' + tollsJS.toFixed(2) + '');
+    tip.innerHTML = ('$' + tipJS + '');
+    tolls.innerHTML = ('$' + tollsJS + '');
     totalFare.innerHTML = ('$' + totalJS + '');
 
 
