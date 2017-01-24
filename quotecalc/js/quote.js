@@ -28,6 +28,38 @@ function initMap() {
 	directionsDisplay.setPanel(document.getElementById("panel"));
 	directionsService = new google.maps.DirectionsService();
 	geocoder = new google.maps.Geocoder()
+	
+	var placeSearch, autocomplete, ac1;
+	    function initAutocomplete() {
+	        // Create the autocomplete object, restricting the search to geographical
+	        // location types.
+	        autocomplete = new google.maps.places.Autocomplete(
+	            /** @type {!HTMLInputElement} */(document.getElementById('pickup')),
+	            {types: ['geocode']});
+		    
+		    ac1 = new google.maps.places.Autocomplete(
+	            /** @type {!HTMLInputElement} */(document.getElementById('dropoff')),
+	            {types: ['geocode']});
+
+	        // When the user selects an address from the dropdown, populate the address
+	        // fields in the form.
+	        //autocomplete.addListener('place_changed', fillInAddress);
+	      }
+	      function geolocate() {
+	        if (navigator.geolocation) {
+	          navigator.geolocation.getCurrentPosition(function(position) {
+	            var geolocation = {
+	              lat: position.coords.latitude,
+	              lng: position.coords.longitude
+	            };
+	            var circle = new google.maps.Circle({
+	              center: geolocation,
+	              radius: position.coords.accuracy
+	            });
+	            autocomplete.setBounds(circle.getBounds());
+	          });
+	        }
+	      }
 
 }
 
