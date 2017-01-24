@@ -26,13 +26,18 @@ function initMap() {
     directionsService = new google.maps.DirectionsService();
     geocoder = new google.maps.Geocoder();
 
-    var autocomplete;
+    var autocomplete, autocomplete2;
 
     // Create the autocomplete object, restricting the search to geographical
     // location types.
     autocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */
         (document.getElementById('pickup')), {
+            types: ['geocode']
+        });
+    autocomplete2 = new google.maps.places.Autocomplete(
+        /** @type {!HTMLInputElement} */
+        (document.getElementById('dropoff')), {
             types: ['geocode']
         });
 
