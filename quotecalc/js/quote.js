@@ -189,10 +189,10 @@ function calcQuote(d, t) {
     expression = Math.round(expression);
     expression = expression + 2;
     tipJS = expression * 0.2;
-    tollsJS = tollsJS.toFixed(2);
+    tollsJS = parseFloat(tollsJS).toFixed(2);
     totalJS = (expression + tipJS + tollsJS);
     console.log(totalJS);
-    //totalJS = totalJS.toFixed(2);
+    totalJS = parseFloat(totalJS).toFixed(2);
 
 
     //quote.innerHTML = ('$' + expression + '');
