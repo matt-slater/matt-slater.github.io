@@ -37,9 +37,9 @@ function initMap() {
 	            /** @type {!HTMLInputElement} */(document.getElementById('pickup')),
 	            {types: ['geocode']});
 		    
-		    ac1 = new google.maps.places.Autocomplete(
-	            /** @type {!HTMLInputElement} */(document.getElementById('dropoff')),
-	            {types: ['geocode']});
+		  //  ac1 = new google.maps.places.Autocomplete(
+	           // /** @type {!HTMLInputElement} */(document.getElementById('dropoff')),
+	           // {types: ['geocode']});
 
 	        // When the user selects an address from the dropdown, populate the address
 	        // fields in the form.
