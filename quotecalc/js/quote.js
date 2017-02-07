@@ -175,15 +175,18 @@ function calcQuote(d, t) {
     } else if (d >= 25 && d < 50) {
         expression = (d * 4) + 30;
         tollsJS = (expression * 1.2) * 0.05;
-    } else if (d >= 50 && d < 100) {
+    } else if (d >= 50 && d < 150) {
         expression = (d * 3.50);
         tollsJS = (expression * 1.2) * 0.05;
 
-    } else if (d >= 100 && d < 1000) {
-        expression = (d * 2.05);
+    } else if (d >= 150 && d < 300) {
+        expression = (d * 3.25);
         tollsJS = (expression * 1.2) * 0.05;
-    } else if (d > 1000) {
-        expression = (d * 1.75);
+    } else if (d >= 300 && d < 1000) {
+        expression = (d * 2.25);
+        tollsJS = (expression * 1.2) * 0.05;
+    } else if (d >= 1000) {
+        expression = (d * 1.50);
         tollsJS = (expression * 1.2) * 0.05;
     }
 
