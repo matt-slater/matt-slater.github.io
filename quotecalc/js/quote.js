@@ -180,10 +180,10 @@ function calcQuote(d, t) {
         tollsJS = (expression * 1.2) * 0.05;
 
     } else if (d >= 150 && d < 250) {
-        expression = (d * 2.75);
+        expression = (d * 2.25);
         tollsJS = (expression * 1.2) * 0.05;
     } else if (d >= 250 && d < 1000) {
-        expression = (d * 2.25);
+        expression = (d * 1.75);
         tollsJS = (expression * 1.2) * 0.05;
     } else if (d >= 1000) {
         expression = (d * 1.50);
