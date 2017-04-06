@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Spotify Puzzle Challenge: Zipf&apos;s Song</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Matt Slater's site">
+    <meta name="author" content="Matt Slater">
+    <meta name="keywords" content="java, cloud, software, developer, programmer">
+    <meta name="generator" content="JBake">
+
+    <!-- Le styles -->
+    <!-- <link href="../../css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="../../css/styles.css" rel="stylesheet">
+    <link href="../../css/asciidoctor.css" rel="stylesheet">
+    <link href="../../css/styles/googlecode.css" rel="stylesheet">
+    <!-- <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/prettify.css" rel="stylesheet"> -->
+    <script src="../../js/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="../../favicon.ico">
+  </head>
+  <body>
+
+
+      <div id="left"></div>
+   <div id="right"></div>
+   <div id="top"></div>
+   <div id="bottom"></div>
+
+<h1 id="name"><a id="pizza" href="../../">MATT SLATER</a></h1>
+<nav>
+			 <a href="../../index.html">HOME</a> |
+			 <a href="https://github.com/matt-slater">PROJECTS</a> |
+			 <a href="../../about.html">ABOUT</a> |
+			 <a href="../../feed.xml">SUBSCRIBE</a>
+	 </nav>
+
+	<div class="contentBox">
+		<h2>Spotify Puzzle Challenge: Zipf&apos;s Song</h2>
+
+
+	<p><em>05 April 2017</em></p>
+
+	<p><p>I recently came across Spotify Engineering's <a href="https://twitter.com/spotifyeng">twitter</a> and <a href="https://labs.spotify.com/">blog</a> after reading about their open-sourced java microservices framework, <a href="https://spotify.github.io/apollo/">Apollo</a>. After reading a fascinating article about the many interesting ways the company uses DNS, I noticed the "Puzzles" page and had to check it out.</p><p>The puzzles page lists three problems of varying difficulty (easy, medium, hard) that, you guessed it, are programming exercises. The problem I chose was "Zipf's Song." You are given a list of songs on an album and their play counts and you must find out which tracks are the most popular. The catch is that the songs with the most plays are not necessarily the most popular tracks. If all songs are equal, the play frequencies of each song will fall off in accordance with Zipf's Law: Given a track number <em>t</em>, it should get 1/ <em>t</em> the number of listens as the first track.</p><p>The algorithm to solve this is simple. for any track, the quality is determined by the track number <em>t</em> multiplied by the number of plays <em>p</em>. Once the relative qualities of each track are determined, one can evaluate the tracks on a level playing field.</p><p>For my <a href="https://github.com/matt-slater/spotify/tree/master/zipf/src/main/java">solution</a>, I chose to implement my own data structure to encapsulate the data needed for each track:</p>
+<pre><code class="java">class Song implements Comparable&lt;Song&gt; {
+
+    private double quality;
+    private String title;
+
+    public Song(String title, double quality) {
+        this.title = title;
+        this.quality = quality;
+    }
+
+    @Override
+    public int compareTo(Song o2) {
+        if (this.quality &lt; o2.getQuality()) {
+            return 1;
+        } else if (this.quality &gt; o2.getQuality()) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    //getters, setters, toString()...
+
+}
+</code></pre><p>Since I needed to be able to return the top <em>n</em> tracks in order, I needed a way to compare two Song objects. This is where the <code>Comparable&lt;T&gt;</code> interface comes in. <code>Comparable&lt;T&gt;</code> is used to determine the natural order of objects. By choosing to override the <code>compareTo()</code> method, you'll be able to compare two objects that don't necessarily have a logical or apparent natural order. Originally, my solution used a custom <code>Comparator&lt;T&gt;</code> class that did pretty much the same thing, but I changed it because the solution didn't call for comparing songs in multiple ways.</p><p>I finished coding up the solution and sent it along to the judge via email. I patted myself on the back. That was easier than I thought.</p><p>I was denied. My solution was too slow. But how? I was using an <code>ArrayList&lt;Song&gt;</code> to store the album and the sort couldn't take that long, could it? I tried using a <code>PriorityQueue</code>. Still too slow.</p><p>Then it hit me. The culprit was <code>Scanner</code>. When I changed the input reader to Kattis' custom IO class , it worked like a charm. Kattis is the platform that is used to judge the submissions. I intended to use a <code>BufferedReader</code>, but Kattis' class makes working with <code>System.in</code> a lot less of a hassle.</p>
+<pre><code class="java">public static void main(String[] args) {
+
+       Kattio in = new Kattio(System.in);
+
+       long m = in.getLong();
+       long n = in.getLong();
+
+       ArrayList&lt;Song&gt; songArrayList = new ArrayList&lt;Song&gt;();
+
+       //add first song
+
+       long plays = in.getLong();
+       String firstTitle = in.getWord();
+       songArrayList.add(new Song(firstTitle, plays));
+
+       //add rest of songs
+
+       for (long i = 0; i &lt; m - 1; i++) {
+           long numPlays = in.getLong();
+           String title = in.getWord();
+           songArrayList.add(new Song(title, (numPlays * (i+2))));
+       }
+
+       Collections.sort(songArrayList);
+
+       for (int i = 0; i &lt; n; i++) {
+           System.out.println(songArrayList.get(i).getTitle());
+       }
+
+   }
+}
+</code></pre><p>Finally accepted. My reward? An email that read:</p>
+<blockquote><p>Hello Matt Slater,</p><p>Thank you for submitting a solution to our problem "zipfsong"!<br/>We have tested your solution, and we are happy to report that it<br/>solved the problem! We hope you had as fun with it as we did.</p><p>Yours truly,</p><p>Spotify</p>
+</blockquote></p>
+
+
+
+	</div>
+
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../js/jquery-1.11.1.min.js"></script>
+    <!-- <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/prettify.js"></script> -->
+		<script src="../../js/core.js"></script>
+    
+
+  </body>
+</html>

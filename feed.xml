@@ -6,16 +6,84 @@
     <atom:link href="http://jbake.org/feed.xml" rel="self" type="application/rss+xml" />
     <description>Matt Slater's Blog</description>
     <language>en-gb</language>
-    <pubDate>Sun, 10 Apr 2016 22:24:09 -0400</pubDate>
-    <lastBuildDate>Sun, 10 Apr 2016 22:24:09 -0400</lastBuildDate>
+    <pubDate>Thu, 6 Apr 2017 12:31:26 -0400</pubDate>
+    <lastBuildDate>Thu, 6 Apr 2017 12:31:26 -0400</lastBuildDate>
 
     <item>
-      <title>Hello, World or &quot;Laissez la folie commencer&quot;</title>
+      <title>Spotify Puzzle Challenge: Zipf&apos;s Song</title>
+      <link>http://jbake.org/blog/2017/zipf.html</link>
+      <pubDate>Wed, 5 Apr 2017 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2017/zipf.html</guid>
+      	<description>
+	&lt;p&gt;I recently came across Spotify Engineering&apos;s &lt;a href=&quot;https://twitter.com/spotifyeng&quot;&gt;twitter&lt;/a&gt; and &lt;a href=&quot;https://labs.spotify.com/&quot;&gt;blog&lt;/a&gt; after reading about their open-sourced java microservices framework, &lt;a href=&quot;https://spotify.github.io/apollo/&quot;&gt;Apollo&lt;/a&gt;. After reading a fascinating article about the many interesting ways the company uses DNS, I noticed the &quot;Puzzles&quot; page and had to check it out.&lt;/p&gt;&lt;p&gt;The puzzles page lists three problems of varying difficulty (easy, medium, hard) that, you guessed it, are programming exercises. The problem I chose was &quot;Zipf&apos;s Song.&quot; You are given a list of songs on an album and their play counts and you must find out which tracks are the most popular. The catch is that the songs with the most plays are not necessarily the most popular tracks. If all songs are equal, the play frequencies of each song will fall off in accordance with Zipf&apos;s Law: Given a track number &lt;em&gt;t&lt;/em&gt;, it should get 1/ &lt;em&gt;t&lt;/em&gt; the number of listens as the first track.&lt;/p&gt;&lt;p&gt;The algorithm to solve this is simple. for any track, the quality is determined by the track number &lt;em&gt;t&lt;/em&gt; multiplied by the number of plays &lt;em&gt;p&lt;/em&gt;. Once the relative qualities of each track are determined, one can evaluate the tracks on a level playing field.&lt;/p&gt;&lt;p&gt;For my &lt;a href=&quot;https://github.com/matt-slater/spotify/tree/master/zipf/src/main/java&quot;&gt;solution&lt;/a&gt;, I chose to implement my own data structure to encapsulate the data needed for each track:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;class Song implements Comparable&amp;lt;Song&amp;gt; {
+
+    private double quality;
+    private String title;
+
+    public Song(String title, double quality) {
+        this.title = title;
+        this.quality = quality;
+    }
+
+    @Override
+    public int compareTo(Song o2) {
+        if (this.quality &amp;lt; o2.getQuality()) {
+            return 1;
+        } else if (this.quality &amp;gt; o2.getQuality()) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    //getters, setters, toString()...
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Since I needed to be able to return the top &lt;em&gt;n&lt;/em&gt; tracks in order, I needed a way to compare two Song objects. This is where the &lt;code&gt;Comparable&amp;lt;T&amp;gt;&lt;/code&gt; interface comes in. &lt;code&gt;Comparable&amp;lt;T&amp;gt;&lt;/code&gt; is used to determine the natural order of objects. By choosing to override the &lt;code&gt;compareTo()&lt;/code&gt; method, you&apos;ll be able to compare two objects that don&apos;t necessarily have a logical or apparent natural order. Originally, my solution used a custom &lt;code&gt;Comparator&amp;lt;T&amp;gt;&lt;/code&gt; class that did pretty much the same thing, but I changed it because the solution didn&apos;t call for comparing songs in multiple ways.&lt;/p&gt;&lt;p&gt;I finished coding up the solution and sent it along to the judge via email. I patted myself on the back. That was easier than I thought.&lt;/p&gt;&lt;p&gt;I was denied. My solution was too slow. But how? I was using an &lt;code&gt;ArrayList&amp;lt;Song&amp;gt;&lt;/code&gt; to store the album and the sort couldn&apos;t take that long, could it? I tried using a &lt;code&gt;PriorityQueue&lt;/code&gt;. Still too slow.&lt;/p&gt;&lt;p&gt;Then it hit me. The culprit was &lt;code&gt;Scanner&lt;/code&gt;. When I changed the input reader to Kattis&apos; custom IO class , it worked like a charm. Kattis is the platform that is used to judge the submissions. I intended to use a &lt;code&gt;BufferedReader&lt;/code&gt;, but Kattis&apos; class makes working with &lt;code&gt;System.in&lt;/code&gt; a lot less of a hassle.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;public static void main(String[] args) {
+
+       Kattio in = new Kattio(System.in);
+
+       long m = in.getLong();
+       long n = in.getLong();
+
+       ArrayList&amp;lt;Song&amp;gt; songArrayList = new ArrayList&amp;lt;Song&amp;gt;();
+
+       //add first song
+
+       long plays = in.getLong();
+       String firstTitle = in.getWord();
+       songArrayList.add(new Song(firstTitle, plays));
+
+       //add rest of songs
+
+       for (long i = 0; i &amp;lt; m - 1; i++) {
+           long numPlays = in.getLong();
+           String title = in.getWord();
+           songArrayList.add(new Song(title, (numPlays * (i+2))));
+       }
+
+       Collections.sort(songArrayList);
+
+       for (int i = 0; i &amp;lt; n; i++) {
+           System.out.println(songArrayList.get(i).getTitle());
+       }
+
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Finally accepted. My reward? An email that read:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Hello Matt Slater,&lt;/p&gt;&lt;p&gt;Thank you for submitting a solution to our problem &quot;zipfsong&quot;!&lt;br/&gt;We have tested your solution, and we are happy to report that it&lt;br/&gt;solved the problem! We hope you had as fun with it as we did.&lt;/p&gt;&lt;p&gt;Yours truly,&lt;/p&gt;&lt;p&gt;Spotify&lt;/p&gt;
+&lt;/blockquote&gt;
+	</description>
+    </item>
+    <item>
+      <title>Hello, World.</title>
       <link>http://jbake.org/blog/2016/hello-world.html</link>
       <pubDate>Fri, 1 Apr 2016 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2016/hello-world.html</guid>
       	<description>
-	&lt;p&gt;This is it.&lt;br/&gt;This is the first post.&lt;br/&gt;The first post of many posts.&lt;/p&gt;&lt;p&gt;I&apos;ll be writing about my personal projects.&lt;br/&gt;I&apos;ll be writing about coding.&lt;br/&gt;I&apos;ll be writing about the things I learn.&lt;/p&gt;&lt;p&gt;Are you ready?&lt;br/&gt;I am.&lt;/p&gt;&lt;p&gt;-M&lt;/p&gt;
+	&lt;p&gt;This is it.&lt;br/&gt;This is the first post.&lt;br/&gt;The first post of many posts.&lt;/p&gt;&lt;p&gt;I&apos;ll be writing about my personal projects.&lt;br/&gt;I&apos;ll be writing about coding.&lt;br/&gt;I&apos;ll be writing about the things I learn.&lt;/p&gt;&lt;p&gt;Are you ready?&lt;br/&gt;I am.&lt;/p&gt;
 	</description>
     </item>
 
