@@ -43,7 +43,21 @@ body {
     text-align: center;
     text-decoration: underline;
     color: black;
+
 }
+
+#date {
+    font-family: 'Inconsolata';
+    text-align: center;
+    color: black;
+    display: inline;
+    padding-right:1em
+}
+#explain {
+    font-family: 'Inconsolata';
+    text-align: center;
+}
+
 
 #pizza {
   text-decoration: underline;
